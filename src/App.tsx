@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import "./App.css";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
+import Home from "./components/Home";
+import Detail from "./components/Detail";
+import Login from "./components/Login";
+import { AuthProvider, authenticationContext } from "./authenticationProvider";
+
+function LoggedRoute() {
+  const { isAuthenticated } = useContext(authenticationContext);
+  if (isAuthenticated) return <Navigate to="/" />;
+  return <Outlet />;
+}
+
+function ProtectedRoute() {
+  const { isAuthenticated } = useContext(authenticationContext);
+  if (!isAuthenticated) return <Navigate to="/login" />;
+  return <Outlet />;
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<LoggedRoute />}>
+            <Route path="/login" Component={Login} />
+          </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" Component={Home} />
+            <Route path="/:id" Component={Detail} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
