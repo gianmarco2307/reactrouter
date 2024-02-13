@@ -14,13 +14,13 @@ import { AuthProvider, authenticationContext } from "./authenticationProvider";
 
 function LoggedRoute() {
   const { isAuthenticated } = useContext(authenticationContext);
-  if (isAuthenticated) return <Navigate to="/" />;
+  if (isAuthenticated) return <Navigate to="reactrouter/" />;
   return <Outlet />;
 }
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(authenticationContext);
-  if (!isAuthenticated) return <Navigate to="/login" />;
+  if (!isAuthenticated) return <Navigate to="reactrouter/login" />;
   return <Outlet />;
 }
 
@@ -30,11 +30,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<LoggedRoute />}>
-            <Route path="/login" Component={Login} />
+            <Route path="reactrouter/login" Component={Login} />
           </Route>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" Component={Home} />
-            <Route path="/:id" Component={Detail} />
+            <Route path="reactrouter/" Component={Home} />
+            <Route path="reactrouter/:id" Component={Detail} />
           </Route>
         </Routes>
       </BrowserRouter>

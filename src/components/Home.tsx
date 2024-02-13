@@ -21,7 +21,7 @@ function Home() {
   }, []);
 
   function navigationTo(postId: string): string {
-    const navigationTo: string = "/" + postId;
+    const navigationTo: string = "/reactrouter/" + postId;
     return navigationTo;
   }
 
