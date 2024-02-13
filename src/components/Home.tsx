@@ -30,13 +30,15 @@ function Home() {
       <ul>
         {posts?.map((post) => {
           return (
-            <ul>
-              <Li>
-                <NavLink to={navigationTo(post.id)} key={post.id} className="item">
-                  <p>{post.title}</p>
-                </NavLink>
-              </Li>
-            </ul>
+            <Li key={post.id}>
+              <NavLink
+                to={navigationTo(post.id)}
+                key={post.id}
+                className="item"
+              >
+                <p>{post.title}</p>
+              </NavLink>
+            </Li>
           );
         })}
       </ul>

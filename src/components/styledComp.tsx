@@ -18,7 +18,8 @@ export const Button = styled.button(() => ({
 }));
 
 export const Li = styled.li(() => ({
-    width: "70%"
+    width: "50%",
+    margin: "auto"
 }))
 
 export const DetailDiv = styled.div(() => ({
